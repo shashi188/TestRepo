@@ -13,9 +13,6 @@
 			}
 		],
 		"variables": {
-			"filename": {
-				"type": "String"
-			},
 			"FileName": {
 				"type": "String"
 			}
