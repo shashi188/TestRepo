@@ -90,9 +90,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"AzureBlobStorage2_properties_typeProperties_connectionString_secretName": {
-						"value": "[parameters('AzureBlobStorage2_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
@@ -113,6 +110,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage2_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('AzureBlobStorage2_properties_typeProperties_connectionString_secretName')]"
 					}
 				}
 			},
