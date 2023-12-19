@@ -41,6 +41,14 @@
 				}
 			}
 		],
+		"variables": {
+			"filename": {
+				"type": "String"
+			},
+			"FileName": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-12-15T06:50:41Z"
 	},
