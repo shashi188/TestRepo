@@ -3,41 +3,12 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DeletePipeline",
-				"type": "Delete",
+				"name": "Wait1",
+				"type": "Wait",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [
-					{
-						"name": "filedelated",
-						"value": "files delete from output folder "
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "outputdeletedataset",
-						"type": "DatasetReference"
-					},
-					"logStorageSettings": {
-						"linkedServiceName": {
-							"referenceName": "Linkedservice_Storgae_adfdemo",
-							"type": "LinkedServiceReference"
-						},
-						"path": "adfdemo/output"
-					},
-					"enableLogging": true,
-					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
-						"recursive": false,
-						"wildcardFileName": "*.txt",
-						"enablePartitionDiscovery": false
-					}
+					"waitTimeInSeconds": 10
 				}
 			}
 		],
