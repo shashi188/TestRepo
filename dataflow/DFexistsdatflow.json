@@ -1,0 +1,72 @@
+{
+	"name": "DFexistsdatflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empDataset",
+						"type": "DatasetReference"
+					},
+					"name": "empexitsdata"
+				},
+				{
+					"dataset": {
+						"referenceName": "DeptDataset",
+						"type": "DatasetReference"
+					},
+					"name": "deptexistsdataset"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dfexustsoudstaset",
+						"type": "DatasetReference"
+					},
+					"name": "dfexustsdatasetop"
+				}
+			],
+			"transformations": [
+				{
+					"name": "exists1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          empno as string,",
+				"          ename as string,",
+				"          sal as string,",
+				"          loc as string,",
+				"          dept as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> empexitsdata",
+				"source(output(",
+				"          dno as string,",
+				"          dname as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> deptexistsdataset",
+				"empexitsdata, deptexistsdataset exists(dept == dno,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> exists1",
+				"exists1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Category as string,",
+				"          Status as string,",
+				"          Error as string",
+				"     ),",
+				"     partitionFileNames:['deptdoesnotexist'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> dfexustsdatasetop"
+			]
+		}
+	}
+}

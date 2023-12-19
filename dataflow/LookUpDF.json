@@ -1,0 +1,73 @@
+{
+	"name": "LookUpDF",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empDataset",
+						"type": "DatasetReference"
+					},
+					"name": "empsourcestrem"
+				},
+				{
+					"dataset": {
+						"referenceName": "DeptDataset",
+						"type": "DatasetReference"
+					},
+					"name": "deptsourcestream"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "LookUpDataset",
+						"type": "DatasetReference"
+					},
+					"name": "lookupoutput"
+				}
+			],
+			"transformations": [
+				{
+					"name": "lookup1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          empno as string,",
+				"          ename as string,",
+				"          sal as string,",
+				"          loc as string,",
+				"          dept as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> empsourcestrem",
+				"source(output(",
+				"          dno as string,",
+				"          dname as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> deptsourcestream",
+				"empsourcestrem, deptsourcestream lookup(dept == dno,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Category as string,",
+				"          Status as string,",
+				"          Error as string",
+				"     ),",
+				"     partitionFileNames:['LookUpOutFile.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> lookupoutput"
+			]
+		}
+	}
+}

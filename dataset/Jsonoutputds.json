@@ -1,0 +1,20 @@
+{
+	"name": "Jsonoutputds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Linkedservice_Storgae_adfdemo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "output",
+				"container": "adfdemo"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

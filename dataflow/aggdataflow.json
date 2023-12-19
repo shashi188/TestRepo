@@ -1,0 +1,87 @@
+{
+	"name": "aggdataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "aggsrcdataset",
+						"type": "DatasetReference"
+					},
+					"name": "aggsourse"
+				},
+				{
+					"dataset": {
+						"referenceName": "dptdataset",
+						"type": "DatasetReference"
+					},
+					"name": "depsrc"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "aggtgtdataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1",
+					"rejectedDataLinkedService": {
+						"referenceName": "Linkedservice_Storgae_adfdemo",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          empno as string,",
+				"          ename as string,",
+				"          sal as string,",
+				"          loc as string,",
+				"          dept as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> aggsourse",
+				"source(output(",
+				"          dno as string,",
+				"          dname as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> depsrc",
+				"aggsourse aggregate(groupBy(dept),",
+				"     totalemplyees = count(empno)) ~> aggregate1",
+				"aggregate1, depsrc join(dept == dno,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Name as string,",
+				"          Category as string,",
+				"          Status as string,",
+				"          Error as string",
+				"     ),",
+				"     partitionFileNames:['totalepldata.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Name = dname,",
+				"          Category = totalemplyees",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}

@@ -1,0 +1,46 @@
+{
+	"name": "Jsoninputcsvds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Linkedservice_Storgae_adfdemo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "csvjson.json",
+				"folderPath": "input",
+				"container": "adfdemo"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"empno": {
+					"type": "integer"
+				},
+				"ename": {
+					"type": "string"
+				},
+				"sal": {
+					"type": "integer"
+				},
+				"loc": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"gender": {
+					"type": "string"
+				},
+				"deptno": {
+					"type": "integer"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

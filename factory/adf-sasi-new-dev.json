@@ -1,0 +1,9 @@
+{
+	"name": "adf-sasi-new-dev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c8929bbc-2623-4da6-9b5f-a5ea6d6e75ba",
+		"tenantId": "c9cd5b6a-091b-4d6c-b01a-1a1e7acdb811"
+	}
+}
