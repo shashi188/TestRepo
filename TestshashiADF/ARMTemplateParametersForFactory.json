@@ -4,6 +4,9 @@
 	"parameters": {
 		"factoryName": {
 			"value": "TestshashiADF"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
 		}
 	}
 }
