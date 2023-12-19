@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-sasi-new-dev"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"LinkedServiceSQLserver_connectionString": {
+			"value": ""
+		},
+		"Linkedservice_Storgae_adfdemo_connectionString": {
+			"value": ""
+		},
+		"SqlServerLinkedservice_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage2_properties_typeProperties_connectionString_secretName": {
+			"value": "secret-adf-shashistorage"
+		},
+		"LikedServicewithKvshashi_properties_typeProperties_baseUrl": {
+			"value": "https://shashi-adf-kv.vault.azure.net/"
+		}
+	}
+}
