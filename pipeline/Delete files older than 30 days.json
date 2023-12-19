@@ -33,7 +33,7 @@
 					},
 					"logStorageSettings": {
 						"linkedServiceName": {
-							"referenceName": "AzureBlobStorage1",
+							"referenceName": "Linkedservice_Storgae_adfdemo",
 							"type": "LinkedServiceReference"
 						},
 						"path": {
