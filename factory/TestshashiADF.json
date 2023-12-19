@@ -1,0 +1,9 @@
+{
+	"name": "TestshashiADF",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "cfd59c85-b02e-4202-b3f9-e440900fa141",
+		"tenantId": "c9cd5b6a-091b-4d6c-b01a-1a1e7acdb811"
+	}
+}
