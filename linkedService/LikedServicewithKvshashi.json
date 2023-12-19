@@ -1,0 +1,10 @@
+{
+	"name": "LikedServicewithKvshashi",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://shashi-adf-kv.vault.azure.net/"
+		}
+	}
+}
