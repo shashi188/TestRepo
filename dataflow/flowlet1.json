@@ -14,6 +14,9 @@
 				},
 				{
 					"name": "input1"
+				},
+				{
+					"name": "output1"
 				}
 			],
 			"scriptLines": [
@@ -35,7 +38,8 @@
 				"          gender",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 output() ~> output1"
 			]
 		}
 	}

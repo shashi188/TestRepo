@@ -1,0 +1,50 @@
+{
+	"name": "flowlet31",
+	"properties": {
+		"type": "Flowlet",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "surrogateKey1"
+				},
+				{
+					"name": "input1"
+				},
+				{
+					"name": "input2"
+				},
+				{
+					"name": "output1"
+				}
+			],
+			"scriptLines": [
+				"input(output(",
+				"          empno as string,",
+				"          ename as string,",
+				"          sal as string,",
+				"          loc as string,",
+				"          dept as string,",
+				"          dno as string,",
+				"          dname as string",
+				"     ),",
+				"     order: 0,",
+				"     allowSchemaDrift: true) ~> input1",
+				"input(output(",
+				"          empno as string,",
+				"          ename as string,",
+				"          sal as string,",
+				"          loc as string,",
+				"          dept as string",
+				"     ),",
+				"     order: 1,",
+				"     allowSchemaDrift: true) ~> input2",
+				"input2 keyGenerate(output(primarykey as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"input1 output() ~> output1"
+			]
+		}
+	}
+}
