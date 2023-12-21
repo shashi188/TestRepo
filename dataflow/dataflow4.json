@@ -20,6 +20,13 @@
 			"transformations": [
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "flowlet1",
+					"flowlet": {
+						"referenceName": "flowlet31",
+						"type": "DataFlowReference"
+					}
 				}
 			],
 			"scriptLines": [
@@ -34,7 +41,23 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 aggregate(maxsal = max(toInteger(sal))) ~> aggregate1",
-				"aggregate1 sink(validateSchema: false,",
+				"aggregate1, aggregate1 compose(mapColumn(",
+				"          empno = maxsal,",
+				"          ename = maxsal,",
+				"          sal = maxsal,",
+				"          loc = maxsal,",
+				"          dept = maxsal,",
+				"          dno = maxsal,",
+				"          dname = maxsal",
+				"     ),mapColumn(",
+				"          empno = maxsal,",
+				"          ename = maxsal,",
+				"          sal = maxsal,",
+				"          loc = maxsal,",
+				"          dept = maxsal",
+				"     ),",
+				"     composition: 'flowlet31') ~> flowlet1@(output1)",
+				"flowlet1@output1 sink(validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     store: 'cache',",
